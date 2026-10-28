@@ -386,6 +386,10 @@ func (s StringSet) Set(value string) error {
 	}
 
 	for v := range strings.SplitSeq(value, ",") {
+		v = strings.TrimSpace(v)
+		if v == "" {
+			continue
+		}
 		s[v] = struct{}{}
 	}
 

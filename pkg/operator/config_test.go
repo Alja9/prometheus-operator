@@ -140,8 +140,12 @@ func TestStringSet(t *testing.T) {
 
 	s = StringSet{}
 
-	require.NoError(t, s.Set("a,b,c"))
-	require.Len(t, s, 3)
+	require.NoError(t, s.Set("a, b, ,c"))
+	require.Equal(t, StringSet{
+		"a": {},
+		"b": {},
+		"c": {},
+	}, s)
 	require.Equal(t, "a,b,c", s.String())
 	for _, k := range []string{"a", "b", "c"} {
 		_, found := s[k]
